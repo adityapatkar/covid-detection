@@ -36,7 +36,7 @@ def main():
     # Once we have the dependencies, add a selector for the app mode on the sidebar.
     st.sidebar.title("What to do")
     app_mode = st.sidebar.selectbox("Choose the app mode",
-        ["Show Instructions", "Diagnose Yourself","Face Detection",'Sentiment Analysis', 'Entity Extraction', "About Us"])
+        ["Show Instructions", "Diagnose Yourself"])
     if app_mode == "Show Instructions":
         st.sidebar.success('To continue select an option.')
         st.title("instructions")
@@ -45,22 +45,6 @@ def main():
         st.write("Please Select Diagnose Yourself from the sidebar")
         st.markdown("""---""")
 
-    elif app_mode == "About Us":
-        st.title("About Us")
-        st.header("Welcome to ML-HUB")
-        st.subheader("We try to make ML accessible to everyone")
-        st.write("ML-Hub.ai is a Machine Learning solution for businesses and individuals wanting to make use of the State-of-the-art Neural Networks in Computer Vision and Natural Language Processing domains. ")
-        st.write("We provide simple drag-and-drop approach to problems that require tremendous coding and knowledge of data science domain.")
-        st.write("Instead of spending time building neural networks and models, you can focus on what matters the most -- Results.")
-        st.write("We take care of all the modelling and processing behind the scenes on our Heroku server.")
-        st.write("We provide solutions for :")
-        st.write("Object Detection | Face Detection | Sentiment Analysis | Entity Extraction")
-        st.markdown("""---""")
-        st.header("Meet Our Team Members")
-        st.write("Aditya Patkar - Lead Developer")
-        st.write("Rakesh Kumar - Frontend Developer")
-        st.write("Radhika Sahastrabudhe - Design Expert")
-        st.write("Apoorva Parashar - Backend and Diagrams ")
     elif app_mode == "Diagnose Yourself":
         choice = st.radio("", ("Show Demo", "Browse an Image"))
         st.write()
@@ -71,7 +55,7 @@ def main():
             if img is not None:
                 image = Image.open(img).convert('RGB')
                 image = preprocess(image)
-                model = torch.load('/Users/aditya/Desktop/Covidxray/covidxray', map_location=torch.device('cpu'))
+                model = torch.load('./covidxray', map_location=torch.device('cpu'))
                 dataset = z()
                 img = image
                 col1, col2 = st.columns(2)
@@ -86,9 +70,9 @@ def main():
                 st.text("This is just for preliminary Diagnosis")
                 st.text("If you suffer from the symptoms, please see a doctor / radiologist.")
         else:
-            image = Image.open("/Users/aditya/Downloads/data/Viral Pneumonia-1.png").convert('RGB')
+            image = Image.open("./data/image.jpeg").convert('RGB')
             image = preprocess(image)
-            model = torch.load('/Users/aditya/Desktop/Covidxray/covidxray', map_location=torch.device('cpu'))
+            model = torch.load('./covidxray', map_location=torch.device('cpu'))
             dataset = z()
             img = image
             col1, col2 = st.columns(2)
